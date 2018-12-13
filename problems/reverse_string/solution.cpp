@@ -1,10 +1,18 @@
 class Solution {
 public:
     string reverseString(string s) {
-        std::string reversed;
-        for(int i = s.size() - 1; i >=0; --i) {
-            reversed += s[i];
+        int start = 0;
+        int end = s.size() - 1;
+        
+        while(start < end)
+        {
+            auto c = s[start];
+            s[start] = s[end];
+            s[end] = c;
+            start++;
+            end--;
         }
-        return reversed;
+        
+        return s;         
     }
 };
