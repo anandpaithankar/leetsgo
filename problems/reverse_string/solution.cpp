@@ -1,18 +1,15 @@
 class Solution {
 public:
-    string reverseString(string s) {
-        int start = 0;
-        int end = s.size() - 1;
-        
-        while(start < end)
-        {
-            auto c = s[start];
-            s[start] = s[end];
-            s[end] = c;
-            start++;
-            end--;
+    void reverseStringHelper(std::vector<char>& s, int start, int end) {
+        if (start >= end) {
+            return;
         }
-        
-        return s;         
+        std::swap(s[start], s[end]);
+        reverseStringHelper(s, start+1, end-1);
+    }
+    
+    void reverseString(vector<char>& s) {
+        int start = 0, end = s.size()-1;
+        reverseStringHelper(s, start, end);
     }
 };
