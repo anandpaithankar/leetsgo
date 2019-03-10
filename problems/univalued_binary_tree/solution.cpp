@@ -12,16 +12,13 @@ public:
     bool isUnivalTree(TreeNode* root) {
         if (root == nullptr) {
             return true;
-        }
+        } 
         
-        int val = root->val;
-        if (root->left && val != root->left->val) {
+        int rootVal = root->val;
+        if ((root->left && rootVal != root->left->val) ||
+            (root->right && rootVal != root->right->val)) {
             return false;
         }
-        
-         if (root->right && val != root->right->val) {
-             return false;
-         }
         
         return isUnivalTree(root->left) && isUnivalTree(root->right);
     }
