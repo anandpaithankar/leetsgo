@@ -1,29 +1,20 @@
 class Solution {
 public:
     vector<int> plusOne(vector<int>& digits) {
-        int carry = 0;
-        int size = digits.size();
-        
-        int sum = digits[size-1] + 1;
-        carry = sum > 9 ? 1 : 0;
-        digits[size-1] = sum % 10;
-        
-        for (int i = size - 2; i >= 0; i--) {
-            sum = digits[i] + carry;
-            carry = sum > 9 ? 1 : 0;
-            digits[i] = sum % 10;
-        }
-        
-        if (carry) {
-            digits.insert(digits.begin(), carry);
-        }
-        
-        int i = 0;
-        while (i < size && digits[i] == 0)
+        for (int i = digits.size() - 1; i >= 0; i--)
         {
-            i++;
+            int digit = digits[i];
+            if (digit < 9)
+            {
+                digits[i] += 1;
+                return digits;
+            }
+            else
+            {
+                digits[i] = 0;
+            }
         }
-        
-        return std::vector<int>(digits.begin()+i, digits.end());
+        digits.insert(digits.begin(), 1);
+        return digits;
     }
 };
