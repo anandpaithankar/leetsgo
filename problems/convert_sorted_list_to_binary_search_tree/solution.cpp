@@ -15,34 +15,33 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Solution {
+    ListNode *list;
 public:
+    TreeNode *sortedListToBST(int start, int end) {
+        if (start > end){
+            return nullptr;
+        }
+        
+        int mid = (start + end ) / 2;
+        TreeNode *leftChild = sortedListToBST(start, mid-1);
+        TreeNode *parent = new TreeNode(list->val);
+        parent->left = leftChild;
+        list = list->next;
+        parent->right = sortedListToBST(mid+1, end);
+        return parent;
+    }
     
-    int ComputeLinkedListLength(ListNode* head) {
+    TreeNode* sortedListToBST(ListNode* head) {
         int n = 0;
-        ListNode* p = head;
+        ListNode *p = head;
+        // Compute the length of a list
         while (p != nullptr) {
             p = p->next;
             n++;
         }
-        return n;
-    }
-    
-    TreeNode* sortedListToBST(int start, int end) {
-        if (start > end) return nullptr;
-        int mid = start + (end - start) /2;
-        TreeNode* left = sortedListToBST(start, mid - 1);
-        TreeNode* parent = new TreeNode{list->val};
-        parent->left = left;
-        list = list->next;
-        parent->right = sortedListToBST(mid + 1, end);
-        return parent;
-    }
-    
-    ListNode* list;
-    TreeNode* sortedListToBST(ListNode* head) {
-        int n = ComputeLinkedListLength(head);
-        list = head;
+        list = head; // set the global
         return sortedListToBST(0, n-1);
     }
 };
