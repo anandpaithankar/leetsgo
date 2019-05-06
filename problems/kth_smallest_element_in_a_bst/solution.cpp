@@ -8,29 +8,25 @@
  * };
  */
 class Solution {
-public:
-    int kthSmallest(TreeNode *root, int &i ,int k) {
-        if (root == nullptr) {
-            return INT_MAX;
+    void kthSmallest(TreeNode *root, int k, int &count, int &val) {
+        if (root == nullptr || count >= k) {
+            return;
         }
         
-        // search left subtree
-        int left = kthSmallest(root->left, i, k);
+        kthSmallest(root->left, k, count, val);
         
-        if (left != INT_MAX) {
-            return left;
+        count++;
+        if (count == k) {
+            val = root->val;
+            return;
         }
         
-        // current element is kth smallest element
-        if (++i == k) {
-            return root->val;
-        }
-        
-        return kthSmallest(root->right, i, k);
+        kthSmallest(root->right, k , count, val);
     }
-    
+public:
     int kthSmallest(TreeNode* root, int k) {
-        int i = 0;
-        return kthSmallest(root, i, k);
+        int count = 0, val =INT_MIN;
+        kthSmallest(root, k, count, val);
+        return val;
     }
 };
