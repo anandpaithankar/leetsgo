@@ -1,2 +1,3 @@
-# learning_golang
+# Learning Golang
+
 Learning Golang
